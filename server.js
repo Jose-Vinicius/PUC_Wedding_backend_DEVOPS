@@ -1,11 +1,14 @@
 import express from "express";
 import cors from "cors";
-import { MercadoPagoConfig, Preference, Payment } from "mercadopago";
+import { processPayment } from "./services/mercadoPagoService.js";
 import dotenv from "dotenv";
 
 import { marcarPresenteComoPago } from "./services/baserowService.js";
 
-const isENVDevelopment = false;
+
+export function isDevelopmentEnvironment() {
+  return process.env.DEVELOPMENT_ENV || "development";
+}
 
 dotenv.config();
 
@@ -14,44 +17,9 @@ app.use(cors());
 app.use(express.json());
 
 
-const client = new MercadoPagoConfig({
-   accessToken: isENVDevelopment
-     ? process.env.MERCADO_PAGO_ACCESS_TOKEN_DEV
-     : process.env.MERCADO_PAGO_ACCESS_TOKEN_PROD,
-});
-
-
 // Endpoint de criação de pagamento
 app.post("/pagamento", async (req, res) => {
-  const { title, price, external_reference } = req.body;
-
-  try {
-    const preference = new Preference(client);
-
-    const response = await preference.create({
-      body: {
-        items: [
-          {
-            title: title || "Presente de Casamento",
-            quantity: 1,
-            unit_price: Number(price),
-          },
-        ],
-        external_reference: external_reference,
-        back_urls: {
-          success: "https://casamentojoseevitoria.com/gifts",
-          failure: "https://casamentojoseevitoria.com/gifts",
-          pending: "https://casamentojoseevitoria.com/gifts",
-        },
-        auto_return: "approved"
-      },
-    });
-
-    res.json({ init_point: response.init_point });
-  } catch (error) {
-    console.error("Erro ao criar pagamento:", error);
-    res.status(500).json({ error: "Erro ao criar pagamento" });
-  }
+  await processPayment(req, res);
 });
 
 
