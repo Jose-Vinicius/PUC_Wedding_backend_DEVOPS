@@ -1,17 +1,10 @@
-import { MercadoPagoConfig, Payment } from "mercadopago";
-import {isDevelopmentEnvironment} from "../server.js";
+import { Payment } from "mercadopago";
 
 import { marcarPresenteComoPago } from "./services/baserowService.js";
 
 dotenv.config();
 
-const isENVDevelopment = isDevelopmentEnvironment();
-
-const client = new MercadoPagoConfig({
-   accessToken: isENVDevelopment === "development"
-     ? process.env.MERCADO_PAGO_ACCESS_TOKEN_DEV
-     : process.env.MERCADO_PAGO_ACCESS_TOKEN_PROD,
-});
+const mercadoPagoClient = mercadoPagoClient();
 
 export async function sendWebhook(req, res) {
     try{

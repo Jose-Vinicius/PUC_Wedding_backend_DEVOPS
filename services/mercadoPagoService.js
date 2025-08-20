@@ -1,15 +1,10 @@
 import { MercadoPagoConfig, Preference, Payment } from "mercadopago";
 import {isDevelopmentEnvironment} from "../server.js";
+import { mercadoPagoClient } from "./mercadoPagoClient.js";
 
 dotenv.config();
 
-const isENVDevelopment = isDevelopmentEnvironment();
-
-const client = new MercadoPagoConfig({
-   accessToken: isENVDevelopment === "development"
-     ? process.env.MERCADO_PAGO_ACCESS_TOKEN_DEV
-     : process.env.MERCADO_PAGO_ACCESS_TOKEN_PROD,
-});
+const mercadoPagoClient = mercadoPagoClient();
 
 export async function processPayment(req, res) {
     const { title, price, external_reference } = req.body;
