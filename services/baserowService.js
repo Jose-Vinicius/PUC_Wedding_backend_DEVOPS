@@ -5,9 +5,9 @@ dotenv.config();
 
 const BASEROW_API_KEY = process.env.BASEROW_API_KEY;
 
-const base_url = "https://api.baserow.io/api/database"
-const table_gifts_id = "451458"
-const field_gift_identificator = "4905932"
+const base_url = process.env.BASEROW_BASE_URL
+const table_gifts_id = process.env.BASEROW_TABLE_GIFTS_ID
+const field_gift_identificator = process.env.BASEROW_FIELD_GIFT_IDENTIFICATOR
 
 
 const baserow_api = axios.create({
