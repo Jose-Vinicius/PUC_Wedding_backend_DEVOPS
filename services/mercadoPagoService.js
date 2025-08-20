@@ -1,6 +1,8 @@
 import { MercadoPagoConfig, Preference, Payment } from "mercadopago";
 import {isDevelopmentEnvironment} from "../server.js";
 
+dotenv.config();
+
 const isENVDevelopment = isDevelopmentEnvironment();
 
 const client = new MercadoPagoConfig({
