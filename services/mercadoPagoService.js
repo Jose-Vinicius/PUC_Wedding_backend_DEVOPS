@@ -1,5 +1,4 @@
-import { MercadoPagoConfig, Preference, Payment } from "mercadopago";
-import {isDevelopmentEnvironment} from "../server.js";
+import { Preference} from "mercadopago";
 import { mercadoPagoClient } from "./mercadoPagoClient.js";
 
 dotenv.config();

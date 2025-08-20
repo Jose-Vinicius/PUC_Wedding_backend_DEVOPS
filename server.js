@@ -4,7 +4,7 @@ import { processPayment } from "./services/mercadoPagoService.js";
 import dotenv from "dotenv";
 
 export function isDevelopmentEnvironment() {
-  return process.env.DEVELOPMENT_ENV || "development";
+  return process.env.ENV || "development";
 }
 
 dotenv.config();
