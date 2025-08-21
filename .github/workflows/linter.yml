@@ -2,16 +2,24 @@ name: Super Linter CI
 
 on:
   push:
-    branches: [ "main", develop ]
+    branches: [ "main", "develop" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Super-Linter
-      uses: super-linter/super-linter@v8.0.0
+     
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  
+
+
+      - name: Run Super-Linter
+        uses: super-linter/super-linter@v8.0.0
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
