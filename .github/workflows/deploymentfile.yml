@@ -13,9 +13,9 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: compact-file
+          name: project.zip
           path: |
-            '**.js'
+            '*.js'
             README.md
-            '/services/**.js'
+            'services/*.js'
    
