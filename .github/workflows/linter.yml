@@ -11,7 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     
+      - name: Verifica se o SHA anterior existe
+        run: |
+          if ! git cat-file -e "${{ github.event.before }}" 2> /dev/null; then
+            echo "SHA anterior não encontrado, rodando linter em todos arquivos."
+            export RUN_LINTER_ON_ALL_FILES=true
+          fi
+        shell: bash
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
