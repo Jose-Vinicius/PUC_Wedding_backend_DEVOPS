@@ -1,0 +1,21 @@
+name: compact file deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: project.zip
+          path: |
+            '*.js'
+            README.md
+            'services/*.js'
+   
