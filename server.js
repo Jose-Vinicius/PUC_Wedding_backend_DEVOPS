@@ -22,7 +22,11 @@ app.post("/pagamento", async (req, res) => {
 
 app.post("/webhook", async (req, res) => {
   await sendWebhook(req, res);
-}); 
+});
+
+app.get("/", (req, res) => {
+  res.send("API de Pagamentos do site de casamento com Mercado Pago");
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

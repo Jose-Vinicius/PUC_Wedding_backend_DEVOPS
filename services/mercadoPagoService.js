@@ -1,9 +1,11 @@
 import { Preference} from "mercadopago";
+import dotenv from "dotenv";
+
 import { mercadoPagoClient } from "./mercadoPagoClient.js";
 
 dotenv.config();
 
-const mercadoPagoClient = mercadoPagoClient();
+const client = mercadoPagoClient();
 
 export async function processPayment(req, res) {
     const { title, price, external_reference } = req.body;
