@@ -1,5 +1,8 @@
 import { MercadoPagoConfig } from "mercadopago";
+import dotenv from "dotenv";
+
 import {isDevelopmentEnvironment} from "../server.js";
+
 
 dotenv.config();
 
