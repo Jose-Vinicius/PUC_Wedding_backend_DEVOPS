@@ -1,13 +1,14 @@
-name: Discord notification
+name: Discord Webhook
 
-on:
-  - push
+on: [push]
 
 jobs:
-  discord-notifier:
+  git:
     runs-on: ubuntu-latest
     steps:
-      - name: Discord Notification
-        uses: tenzin1308/discord-notification@v1.0.0
+      - uses: actions/checkout@v2
+
+      - name: Run Discord Webhook
+        uses: johnnyhuy/actions-discord-git-webhook@main
         with:
-          discord-webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
