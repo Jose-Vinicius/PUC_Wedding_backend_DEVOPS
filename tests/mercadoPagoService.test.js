@@ -1,6 +1,6 @@
 import { jest } from "@jest/globals";
 
-// mock do Preference do mercadopago
+
 const mockCreate = jest.fn();
 const mockPreference = jest.fn(() => ({
   create: mockCreate,
@@ -10,12 +10,12 @@ jest.unstable_mockModule("mercadopago", () => ({
   Preference: mockPreference,
 }));
 
-// mock do mercadoPagoClient
+
 jest.unstable_mockModule("../services/mercadoPagoClient.js", () => ({
-  mercadoPagoClient: jest.fn(() => ({})), // retorna um objeto vazio, só para instanciar
+  mercadoPagoClient: jest.fn(() => ({})),
 }));
 
-// importa a função depois de mockar
+
 const { processPayment } = await import("../services/mercadoPagoService.js");
 
 describe("processPayment", () => {

@@ -1,4 +1,3 @@
-// tests/webhookService.test.js
 
 import { jest } from "@jest/globals";
 
@@ -6,7 +5,7 @@ import { jest } from "@jest/globals";
 const mockMarcarPresenteComoPago = jest.fn();
 const mockGet = jest.fn();
 
-// mock dos módulos
+
 jest.unstable_mockModule("../services/baserowService.js", () => ({
   marcarPresenteComoPago: mockMarcarPresenteComoPago,
 }));
@@ -17,7 +16,7 @@ jest.unstable_mockModule("mercadopago", () => ({
   })),
 }));
 
-// importamos o módulo real DEPOIS dos mocks
+
 let sendWebhook;
 beforeAll(async () => {
   const mod = await import("../services/webhookService.js");

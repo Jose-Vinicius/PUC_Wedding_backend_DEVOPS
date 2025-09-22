@@ -1,11 +1,11 @@
 import { jest } from "@jest/globals";
 
-// mock do server.js
+
 jest.unstable_mockModule("../server.js", () => ({
   isDevelopmentEnvironment: jest.fn(),
 }));
 
-// mock mercadopago
+
 const mockMercadoPagoConfig = jest.fn();
 jest.unstable_mockModule("mercadopago", () => ({
   MercadoPagoConfig: mockMercadoPagoConfig,
